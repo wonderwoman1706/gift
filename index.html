@@ -57,7 +57,6 @@
       to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
     }
 
-    /* 🌸 CONTENT */
     .content {
       text-align: center;
       z-index: 1;
@@ -90,7 +89,10 @@
       position: absolute;
     }
 
-    /* ❤️ HEARTBEAT */
+    .heartbeat {
+      animation: heartbeat 1.6s infinite;
+    }
+
     @keyframes heartbeat {
       0% { transform: scale(1); }
       25% { transform: scale(1.08); }
@@ -99,11 +101,6 @@
       100% { transform: scale(1); }
     }
 
-    .heartbeat {
-      animation: heartbeat 1.6s infinite;
-    }
-
-    /* ✍️ TYPING TEXT */
     .typing {
       font-family: 'Playfair Display', serif;
       font-size: 20px;
@@ -124,6 +121,18 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
+
+    .qr-link {
+      margin-top: 18px;
+      font-size: 20px;
+      color: #ffd1e8;
+      text-decoration: none;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .qr-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -138,7 +147,6 @@
 </div>
 
 <script>
-  /* 💕 HEARTS */
   function startHearts() {
     const container = document.querySelector(".hearts");
     setInterval(() => {
@@ -153,15 +161,12 @@
 
   startHearts();
 
-  /* 😜 NO BUTTON MOVES */
   const noBtn = document.getElementById("noBtn");
-
   setInterval(() => {
     noBtn.style.left = Math.random() * 80 + "vw";
     noBtn.style.top = Math.random() * 80 + "vh";
   }, 700);
 
-  /* 💖 YES CLICK */
   function yesClick() {
     document.body.innerHTML = `
       <div class="hearts"></div>
@@ -187,6 +192,8 @@
           src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
           style="width:260px; margin-top:25px; border-radius:20px;"
         >
+
+        <a class="qr-link" href="#" onclick="openQR()">open this 💌</a>
       </div>
     `;
 
@@ -211,6 +218,75 @@
       }, delay);
       delay += 3200;
     });
+  }
+
+  function openQR() {
+    const qrWindow = window.open("", "_blank");
+
+    qrWindow.document.write(`
+      <html>
+      <head>
+        <title>💌 Love QR</title>
+        <style>
+          body {
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            background: linear-gradient(180deg, #9167B1 0%, #33274C 100%);
+            color:white;
+            overflow:hidden;
+            font-family: Arial, sans-serif;
+          }
+
+          .heart {
+            position:absolute;
+            bottom:-20px;
+            width:20px;
+            height:20px;
+            background: rgba(255,182,193,0.9);
+            transform: rotate(45deg);
+            animation: floatUp linear infinite;
+          }
+
+          .heart::before,
+          .heart::after {
+            content:"";
+            position:absolute;
+            width:20px;
+            height:20px;
+            background: inherit;
+            border-radius:50%;
+          }
+
+          .heart::before { top:-10px; }
+          .heart::after { left:-10px; }
+
+          @keyframes floatUp {
+            from { transform: translateY(0) rotate(45deg); opacity: 1; }
+            to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+          }
+        </style>
+      </head>
+
+      <body>
+        <h2>Scan this 💕</h2>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=I%20love%20you%20a%20lott%20🥰">
+        <script>
+          setInterval(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random()*100 + "vw";
+            heart.style.animationDuration = 3 + Math.random()*3 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+          }, 300);
+        <\/script>
+      </body>
+      </html>
+    `);
   }
 </script>
 

@@ -19,11 +19,12 @@
       overflow: hidden;
     }
 
-    /* 💕 FLOATING HEARTS */
+    /* 💕 HEART BACKGROUND */
     .hearts {
       position: fixed;
       inset: 0;
       z-index: -1;
+      overflow: hidden;
     }
 
     .heart {
@@ -51,7 +52,7 @@
 
     @keyframes floatUp {
       from { transform: translateY(0) rotate(45deg); opacity: 1; }
-      to   { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+      to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
     }
 
     /* 💌 CARD */
@@ -64,9 +65,10 @@
       max-width: 360px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       position: relative;
+      z-index: 1;
     }
 
-    /* 💖 MAIN QUESTION FONT */
+    /* 💖 MAIN TEXT */
     .valentine-text {
       font-family: 'Pacifico', cursive;
       font-size: 32px;
@@ -107,7 +109,7 @@
       animation: heartbeat 1.6s infinite;
     }
 
-    /* ✍️ TYPING TEXT (PLAYFAIR + BOLD) */
+    /* ✍️ TYPING TEXT */
     .typing {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
@@ -123,7 +125,7 @@
 
     @keyframes typing {
       from { width: 0; }
-      to   { width: 100%; }
+      to { width: 100%; }
     }
 
     @keyframes blink {
@@ -143,18 +145,22 @@
 </div>
 
 <script>
-  /* 💕 HEARTS */
-  const heartsContainer = document.querySelector(".hearts");
-  setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.animationDuration = 3 + Math.random() * 3 + "s";
-    heartsContainer.appendChild(h);
-    setTimeout(() => h.remove(), 6000);
-  }, 300);
+  /* 💕 HEART FUNCTION (REUSABLE) */
+  function startHearts() {
+    const container = document.querySelector(".hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  }
 
-  /* 😜 NO BUTTON */
+  startHearts();
+
+  /* 😜 NO BUTTON MOVES */
   const noBtn = document.getElementById("noBtn");
   const card = document.querySelector(".card");
 
@@ -167,6 +173,7 @@
   function yesClick() {
     document.body.innerHTML = `
       <div class="hearts"></div>
+
       <div style="
         display:flex;
         flex-direction:column;
@@ -183,8 +190,15 @@
         </h1>
 
         <div id="typingArea"></div>
+
+        <img
+          src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
+          style="width:260px; margin-top:25px; border-radius:20px;"
+        >
       </div>
     `;
+
+    startHearts(); // ✅ restart hearts on second screen
 
     const messages = [
       "This means a lot to me 💕",
@@ -198,10 +212,10 @@
 
     messages.forEach(text => {
       setTimeout(() => {
-        const d = document.createElement("div");
-        d.className = "typing";
-        d.textContent = text;
-        area.appendChild(d);
+        const line = document.createElement("div");
+        line.className = "typing";
+        line.textContent = text;
+        area.appendChild(line);
       }, delay);
       delay += 3200;
     });

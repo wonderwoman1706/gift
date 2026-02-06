@@ -17,6 +17,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      color: white;
       font-family: Arial, sans-serif;
     }
 
@@ -56,46 +57,37 @@
       to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
     }
 
-    /* 💌 CARD */
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
+    /* 🌸 CONTENT */
+    .content {
       text-align: center;
-      width: 90%;
-      max-width: 360px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      position: relative;
       z-index: 1;
+      padding: 20px;
     }
 
-    /* 💖 MAIN TEXT */
     .valentine-text {
       font-family: 'Pacifico', cursive;
-      font-size: 32px;
-      color: #ff4d6d;
-      margin-bottom: 25px;
+      font-size: 36px;
+      margin-bottom: 30px;
     }
 
     button {
-      padding: 12px 25px;
+      padding: 12px 28px;
       font-size: 16px;
       border: none;
       border-radius: 25px;
       cursor: pointer;
+      margin: 8px;
     }
 
     .yes {
-      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
       color: white;
-      margin-right: 10px;
     }
 
     .no {
       background: #ddd;
+      color: #333;
       position: absolute;
-      left: 20px;
-      top: 120px;
     }
 
     /* ❤️ HEARTBEAT */
@@ -114,16 +106,14 @@
     /* ✍️ TYPING TEXT */
     .typing {
       font-family: 'Playfair Display', serif;
-      font-weight: 700;
       font-size: 20px;
       width: 0;
       overflow: hidden;
       white-space: nowrap;
-      border-right: 3px solid #ff4d6d;
+      border-right: 3px solid white;
       animation: typing 3s steps(40, end) forwards,
                  blink 0.8s infinite;
       margin-top: 12px;
-      color: white;
     }
 
     @keyframes typing {
@@ -141,14 +131,14 @@
 
 <div class="hearts"></div>
 
-<div class="card">
+<div class="content">
   <h1 class="valentine-text">Charan, will you be my Valentine? 💘</h1>
   <button class="yes" onclick="yesClick()">Yes 💖</button>
   <button class="no" id="noBtn">No 😜</button>
 </div>
 
 <script>
-  /* 💕 HEART FUNCTION */
+  /* 💕 HEARTS */
   function startHearts() {
     const container = document.querySelector(".hearts");
     setInterval(() => {
@@ -165,11 +155,10 @@
 
   /* 😜 NO BUTTON MOVES */
   const noBtn = document.getElementById("noBtn");
-  const card = document.querySelector(".card");
 
   setInterval(() => {
-    noBtn.style.left = Math.random() * (card.clientWidth - noBtn.offsetWidth) + "px";
-    noBtn.style.top = Math.random() * (card.clientHeight - noBtn.offsetHeight) + "px";
+    noBtn.style.left = Math.random() * 80 + "vw";
+    noBtn.style.top = Math.random() * 80 + "vh";
   }, 700);
 
   /* 💖 YES CLICK */
@@ -188,7 +177,7 @@
         text-align:center;
         padding:20px;
       ">
-        <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:36px;">
+        <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:38px;">
           You Said YES!!! 💕
         </h1>
 

@@ -12,27 +12,26 @@
     body {
       margin: 0;
       height: 100vh;
-      background: #ffd6e0;
+      background: linear-gradient(135deg, #6b4aa3, #9b6fd3);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
     }
 
-    /* 💕 HEART BACKGROUND */
+    /* 💕 FLOATING HEARTS */
     .hearts {
       position: fixed;
       inset: 0;
       z-index: -1;
-      overflow: hidden;
     }
 
     .heart {
       position: absolute;
       bottom: -20px;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 77, 109, 0.8);
+      width: 14px;
+      height: 14px;
+      background: rgba(255, 160, 190, 0.8);
       transform: rotate(45deg);
       animation: floatUp linear infinite;
     }
@@ -41,14 +40,14 @@
     .heart::after {
       content: "";
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 14px;
+      height: 14px;
       background: inherit;
       border-radius: 50%;
     }
 
-    .heart::before { top: -10px; }
-    .heart::after { left: -10px; }
+    .heart::before { top: -7px; }
+    .heart::after { left: -7px; }
 
     @keyframes floatUp {
       from { transform: translateY(0) rotate(45deg); opacity: 1; }
@@ -57,43 +56,41 @@
 
     /* 💌 CARD */
     .card {
-      background: white;
+      background: transparent;
       padding: 30px;
-      border-radius: 20px;
       text-align: center;
       width: 90%;
-      max-width: 360px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      position: relative;
+      max-width: 420px;
       z-index: 1;
     }
 
-    /* 💖 MAIN TEXT */
+    /* 💖 MAIN QUESTION */
     .valentine-text {
       font-family: 'Pacifico', cursive;
-      font-size: 32px;
-      color: #ff4d6d;
-      margin-bottom: 25px;
+      font-size: 38px;
+      color: #ff7fa2;
+      margin-bottom: 30px;
     }
 
+    /* ❤️ BUTTONS */
     button {
-      padding: 12px 25px;
+      padding: 12px 26px;
       font-size: 16px;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
+      margin: 5px;
     }
 
     .yes {
-      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      background: #ff6f9c;
       color: white;
     }
 
     .no {
-      background: #ddd;
+      background: #2e2e2e;
+      color: #ddd;
       position: absolute;
-      left: 20px;
-      top: 120px;
     }
 
     /* ❤️ HEARTBEAT */
@@ -114,13 +111,14 @@
       font-family: 'Playfair Display', serif;
       font-weight: 700;
       font-size: 20px;
+      color: #ffd1df;
       width: 0;
       overflow: hidden;
       white-space: nowrap;
-      border-right: 3px solid #ff4d6d;
+      border-right: 3px solid #ff7fa2;
       animation: typing 3s steps(40, end) forwards,
                  blink 0.8s infinite;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     @keyframes typing {
@@ -139,28 +137,27 @@
 <div class="hearts"></div>
 
 <div class="card">
-  <h1 class="valentine-text">Charan, will you be my Valentine? 💘</h1>
-  <button class="yes" onclick="yesClick()">Yes 💖</button>
+  <h1 class="valentine-text">Charan, will you be my Valentine?</h1>
+  <button class="yes" onclick="yesClick()">Yes! 💖</button>
   <button class="no" id="noBtn">No 😜</button>
 </div>
 
 <script>
-  /* 💕 HEART FUNCTION (REUSABLE) */
+  /* 💕 HEARTS */
   function startHearts() {
-    const container = document.querySelector(".hearts");
+    const c = document.querySelector(".hearts");
     setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-      container.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = 4 + Math.random() * 3 + "s";
+      c.appendChild(h);
+      setTimeout(() => h.remove(), 7000);
+    }, 350);
   }
-
   startHearts();
 
-  /* 😜 NO BUTTON MOVES */
+  /* 😜 NO BUTTON ESCAPE */
   const noBtn = document.getElementById("noBtn");
   const card = document.querySelector(".card");
 
@@ -169,24 +166,25 @@
     noBtn.style.top = Math.random() * (card.clientHeight - noBtn.offsetHeight) + "px";
   }, 700);
 
-  /* 💖 YES CLICK */
+  /* 💖 YES SCREEN */
   function yesClick() {
     document.body.innerHTML = `
       <div class="hearts"></div>
-
       <div style="
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
         height:100vh;
-        background:#ffd6e0;
-        color:#ff4d6d;
         text-align:center;
         padding:20px;
       ">
-        <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:36px;">
-          You Said YES!!! 💕
+        <h1 class="heartbeat" style="
+          font-family:'Pacifico', cursive;
+          font-size:40px;
+          color:#ff7fa2;
+        ">
+          Yay!!!
         </h1>
 
         <div id="typingArea"></div>
@@ -198,13 +196,11 @@
       </div>
     `;
 
-    startHearts(); // ✅ restart hearts on second screen
+    startHearts();
 
     const messages = [
-      "This means a lot to me 💕",
-      "Hey Charan, you are the best thing that happened to me 💖",
-      "You don't even realize how special you are to me 💕",
-      "My world feels brighter and happier because of you 💓"
+      "I knew you'd say yes!",
+      "You just made me the happiest person 💕"
     ];
 
     const area = document.getElementById("typingArea");

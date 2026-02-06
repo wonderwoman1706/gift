@@ -5,6 +5,9 @@
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- 💕 GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -13,19 +16,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
-    /* 💕 FLOATING HEARTS BACKGROUND */
+    /* 💕 FLOATING HEARTS */
     .hearts {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       z-index: -1;
-      overflow: hidden;
     }
 
     .heart {
@@ -48,25 +46,12 @@
       border-radius: 50%;
     }
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+    .heart::before { top: -10px; }
+    .heart::after { left: -10px; }
 
     @keyframes floatUp {
-      from {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-110vh) rotate(45deg);
-        opacity: 0;
-      }
+      from { transform: translateY(0) rotate(45deg); opacity: 1; }
+      to   { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
     }
 
     /* 💌 CARD */
@@ -75,14 +60,16 @@
       padding: 30px;
       border-radius: 20px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       width: 90%;
-      max-width: 350px;
+      max-width: 360px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       position: relative;
-      z-index: 1;
     }
 
-    h1 {
+    /* 💖 MAIN QUESTION FONT */
+    .valentine-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 32px;
       color: #ff4d6d;
       margin-bottom: 25px;
     }
@@ -107,12 +94,12 @@
       top: 120px;
     }
 
-    /* ❤️ HEARTBEAT TEXT */
+    /* ❤️ HEARTBEAT */
     @keyframes heartbeat {
-      0%   { transform: scale(1); }
-      25%  { transform: scale(1.08); }
-      40%  { transform: scale(1); }
-      60%  { transform: scale(1.08); }
+      0% { transform: scale(1); }
+      25% { transform: scale(1.08); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.08); }
       100% { transform: scale(1); }
     }
 
@@ -120,16 +107,18 @@
       animation: heartbeat 1.6s infinite;
     }
 
-    /* ✍️ TYPING EFFECT */
+    /* ✍️ TYPING TEXT (PLAYFAIR + BOLD) */
     .typing {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 20px;
       width: 0;
       overflow: hidden;
       white-space: nowrap;
       border-right: 3px solid #ff4d6d;
       animation: typing 3s steps(40, end) forwards,
                  blink 0.8s infinite;
-      font-size: 18px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     @keyframes typing {
@@ -145,102 +134,79 @@
 
 <body>
 
-  <!-- 💕 HEART BACKGROUND -->
-  <div class="hearts"></div>
+<div class="hearts"></div>
 
-  <!-- 💌 MAIN CARD -->
-  <div class="card">
-    <h1>Charan, will you be my Valentine? 💘</h1>
-    <button class="yes" onclick="yesClick()">Yes 💖</button>
-    <button class="no" id="noBtn">No 😜</button>
-  </div>
+<div class="card">
+  <h1 class="valentine-text">Charan, will you be my Valentine? 💘</h1>
+  <button class="yes" onclick="yesClick()">Yes 💖</button>
+  <button class="no" id="noBtn">No 😜</button>
+</div>
 
-  <script>
-    /* 💕 CREATE FLOATING HEARTS */
-    const heartsContainer = document.querySelector(".hearts");
+<script>
+  /* 💕 HEARTS */
+  const heartsContainer = document.querySelector(".hearts");
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = 3 + Math.random() * 3 + "s";
+    heartsContainer.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }, 300);
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-      heartsContainer.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }
+  /* 😜 NO BUTTON */
+  const noBtn = document.getElementById("noBtn");
+  const card = document.querySelector(".card");
 
-    setInterval(createHeart, 300);
+  setInterval(() => {
+    noBtn.style.left = Math.random() * (card.clientWidth - noBtn.offsetWidth) + "px";
+    noBtn.style.top = Math.random() * (card.clientHeight - noBtn.offsetHeight) + "px";
+  }, 700);
 
-    /* 😜 NO BUTTON MOVES */
-    const noBtn = document.getElementById("noBtn");
-    const card = document.querySelector(".card");
+  /* 💖 YES CLICK */
+  function yesClick() {
+    document.body.innerHTML = `
+      <div class="hearts"></div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#ffd6e0;
+        color:#ff4d6d;
+        text-align:center;
+        padding:20px;
+      ">
+        <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:36px;">
+          You Said YES!!! 💕
+        </h1>
 
-    function randomMove() {
-      const maxX = card.clientWidth - noBtn.offsetWidth;
-      const maxY = card.clientHeight - noBtn.offsetHeight;
-      noBtn.style.left = Math.random() * maxX + "px";
-      noBtn.style.top = Math.random() * maxY + "px";
-    }
+        <div id="typingArea"></div>
+      </div>
+    `;
 
-    setInterval(randomMove, 700);
+    const messages = [
+      "This means a lot to me 💕",
+      "Hey Charan, you are the best thing that happened to me 💖",
+      "You don't even realize how special you are to me 💕",
+      "My world feels brighter and happier because of you 💓"
+    ];
 
-    /* 💖 YES CLICK */
-    function yesClick() {
-      document.body.innerHTML = `
-        <div class="hearts"></div>
+    const area = document.getElementById("typingArea");
+    let delay = 0;
 
-        <div style="
-          display:flex;
-          flex-direction:column;
-          justify-content:center;
-          align-items:center;
-          height:100vh;
-          background:#ffd6e0;
-          color:#ff4d6d;
-          text-align:center;
-          padding:20px;
-        ">
-          <h1 class="heartbeat">You Said YES!!! 💕</h1>
-          <div id="typingArea"></div>
-
-          <img
-            src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
-            style="width:250px; margin-top:20px; border-radius:20px;"
-          >
-        </div>
-      `;
-
-      /* 💕 Restart Hearts */
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-        document.querySelector(".hearts").appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-      }, 300);
-
-      /* ✍️ Typing Messages */
-      const messages = [
-        "This means a lot to me 💕",
-        "Hey Charan, you are the best thing that happened to me 💖",
-        "You don't even realize how special you are to me 💕",
-        "My world feels brighter and happier because of you 💓"
-      ];
-
-      const typingArea = document.getElementById("typingArea");
-      let delay = 0;
-
-      messages.forEach(text => {
-        setTimeout(() => {
-          const div = document.createElement("div");
-          div.className = "typing";
-          div.textContent = text;
-          typingArea.appendChild(div);
-        }, delay);
-        delay += 3200;
-      });
-    }
-  </script>
+    messages.forEach(text => {
+      setTimeout(() => {
+        const d = document.createElement("div");
+        d.className = "typing";
+        d.textContent = text;
+        area.appendChild(d);
+      }, delay);
+      delay += 3200;
+    });
+  }
+</script>
 
 </body>
 </html>

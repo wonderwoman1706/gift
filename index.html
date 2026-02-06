@@ -5,7 +5,6 @@
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 💕 GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
@@ -76,6 +75,7 @@
       border-radius: 25px;
       cursor: pointer;
       margin: 8px;
+      transition: transform 0.2s;
     }
 
     .yes {
@@ -109,8 +109,10 @@
       white-space: nowrap;
       border-right: 3px solid white;
       animation: typing 3s steps(40, end) forwards,
-                 blink 0.8s infinite;
+                  blink 0.8s infinite;
       margin-top: 12px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @keyframes typing {
@@ -128,10 +130,12 @@
       color: #ffd1e8;
       text-decoration: none;
       font-family: 'Pacifico', cursive;
+      display: inline-block;
     }
 
     .qr-link:hover {
       text-decoration: underline;
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -147,14 +151,13 @@
 </div>
 
 <script>
-  function startHearts() {
-    const container = document.querySelector(".hearts");
+  function startHearts(targetContainer = document.querySelector(".hearts")) {
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-      container.appendChild(heart);
+      targetContainer.appendChild(heart);
       setTimeout(() => heart.remove(), 6000);
     }, 300);
   }
@@ -186,18 +189,19 @@
           You Said YES!!! 💕
         </h1>
 
-        <div id="typingArea"></div>
+        <div id="typingArea" style="max-width: 600px;"></div>
 
-        <img
-          src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
-          style="width:260px; margin-top:25px; border-radius:20px;"
+        <img 
+          src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg" 
+          style="width:260px; margin-top:25px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);"
         >
 
         <a class="qr-link" href="#" onclick="openQR()">open this 💌</a>
       </div>
     `;
 
-    startHearts();
+    const newHeartsContainer = document.querySelector(".hearts");
+    startHearts(newHeartsContainer);
 
     const messages = [
       "This means a lot to me 💕",
@@ -239,6 +243,7 @@
             color:white;
             overflow:hidden;
             font-family: Arial, sans-serif;
+            text-align: center;
           }
 
           .heart {
@@ -268,13 +273,19 @@
             from { transform: translateY(0) rotate(45deg); opacity: 1; }
             to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
           }
+
+          h2 { font-size: 28px; margin-bottom: 10px; }
+          .qr-img { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+          .valentine-gif { width: 220px; margin-top: 20px; border-radius: 15px; }
         </style>
       </head>
 
       <body>
         <h2>Scan this 💕</h2>
-        <img src="https://tenor.com/view/bubududu-panda-gif-21359531">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=I%20love%20you%20a%20lott%20🥰">
+        <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=I%20love%20you%20a%20lott%20🥰">
+        
+        <img class="valentine-gif" src="https://media1.tenor.com/m/1nIDXbABxgsAAAAC/gif-gifkk.gif">
+
         <script>
           setInterval(() => {
             const heart = document.createElement("div");
@@ -293,5 +304,3 @@
 
 </body>
 </html>
-
-

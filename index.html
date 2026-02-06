@@ -5,6 +5,7 @@
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- 💕 GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
@@ -60,54 +61,12 @@
       text-align: center;
       z-index: 1;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* 🖼️ IMAGE STYLING */
-    .image-container {
-      position: relative;
-      margin-bottom: 25px;
-      opacity: 0;
-      animation: fadeIn 2s ease-in forwards;
-      display: inline-block;
-    }
-
-    .main-photo {
-      width: 280px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 4px solid rgba(255, 255, 255, 0.2);
-    }
-
-    /* ❤️ IMAGE OVERLAY HEARTS */
-    .overlay-heart {
-      position: absolute;
-      color: #ff4d6d;
-      font-size: 24px;
-      pointer-events: none;
-      animation: heartFloat 3s infinite ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes heartFloat {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0; }
-      50% { transform: translateY(-40px) scale(1.2); opacity: 1; }
     }
 
     .valentine-text {
       font-family: 'Pacifico', cursive;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-
-    .button-group {
-      margin-top: 10px;
+      font-size: 36px;
+      margin-bottom: 30px;
     }
 
     button {
@@ -117,7 +76,6 @@
       border-radius: 25px;
       cursor: pointer;
       margin: 8px;
-      transition: transform 0.2s;
     }
 
     .yes {
@@ -145,7 +103,7 @@
 
     .typing {
       font-family: 'Playfair Display', serif;
-      font-size: 18px;
+      font-size: 20px;
       width: 0;
       overflow: hidden;
       white-space: nowrap;
@@ -171,6 +129,10 @@
       text-decoration: none;
       font-family: 'Pacifico', cursive;
     }
+
+    .qr-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -180,17 +142,8 @@
 
 <div class="content">
   <h1 class="valentine-text">Charan, will you be my Valentine? 💘</h1>
-  
-  <div class="image-container">
-    <div class="overlay-heart" style="top:10%; left:20%; animation-delay: 0s;">❤️</div>
-    <div class="overlay-heart" style="top:30%; right:15%; animation-delay: 1.5s;">💖</div>
-    <img src="spl_pic.jpg" alt="Special Photo" class="main-photo">
-  </div>
-
-  <div class="button-group">
-    <button class="yes" onclick="yesClick()">Yes 💖</button>
-    <button class="no" id="noBtn">No 😜</button>
-  </div>
+  <button class="yes" onclick="yesClick()">Yes 💖</button>
+  <button class="no" id="noBtn">No 😜</button>
 </div>
 
 <script>
@@ -217,10 +170,29 @@
   function yesClick() {
     document.body.innerHTML = `
       <div class="hearts"></div>
-      <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background: linear-gradient(180deg, #9167B1 0%, #33274C 100%); color:white; text-align:center; padding:20px;">
-        <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:38px;">You Said YES!!! 💕</h1>
+
+      <div style="
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background: linear-gradient(180deg, #9167B1 0%, #33274C 100%);
+        color:white;
+        text-align:center;
+        padding:20px;
+      ">
+        <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:38px;">
+          You Said YES!!! 💕
+        </h1>
+
         <div id="typingArea"></div>
-        <img src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg" style="width:260px; margin-top:25px; border-radius:20px;">
+
+        <img
+          src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
+          style="width:260px; margin-top:25px; border-radius:20px;"
+        >
+
         <a class="qr-link" href="#" onclick="openQR()">open this 💌</a>
       </div>
     `;
@@ -250,18 +222,55 @@
 
   function openQR() {
     const qrWindow = window.open("", "_blank");
+
     qrWindow.document.write(`
       <html>
       <head>
         <title>💌 Love QR</title>
         <style>
-          body { margin:0; height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; background: linear-gradient(180deg, #9167B1 0%, #33274C 100%); color:white; font-family: Arial; overflow:hidden; }
-          .heart { position:absolute; bottom:-20px; width:20px; height:20px; background: rgba(255,182,193,0.9); transform: rotate(45deg); animation: floatUp linear infinite; }
-          .heart::before, .heart::after { content:""; position:absolute; width:20px; height:20px; background: inherit; border-radius:50%; }
-          .heart::before { top:-10px; } .heart::after { left:-10px; }
-          @keyframes floatUp { from { transform: translateY(0) rotate(45deg); opacity: 1; } to { transform: translateY(-110vh) rotate(45deg); opacity: 0; } }
+          body {
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            background: linear-gradient(180deg, #9167B1 0%, #33274C 100%);
+            color:white;
+            overflow:hidden;
+            font-family: Arial, sans-serif;
+          }
+
+          .heart {
+            position:absolute;
+            bottom:-20px;
+            width:20px;
+            height:20px;
+            background: rgba(255,182,193,0.9);
+            transform: rotate(45deg);
+            animation: floatUp linear infinite;
+          }
+
+          .heart::before,
+          .heart::after {
+            content:"";
+            position:absolute;
+            width:20px;
+            height:20px;
+            background: inherit;
+            border-radius:50%;
+          }
+
+          .heart::before { top:-10px; }
+          .heart::after { left:-10px; }
+
+          @keyframes floatUp {
+            from { transform: translateY(0) rotate(45deg); opacity: 1; }
+            to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+          }
         </style>
       </head>
+
       <body>
         <h2>Scan this 💕</h2>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=I%20love%20you%20a%20lott%20🥰">
@@ -283,5 +292,4 @@
 
 </body>
 </html>
-
 

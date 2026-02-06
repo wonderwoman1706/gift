@@ -9,7 +9,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: #ffd6e0; /* light pink */
+      background: #ffd6e0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,15 +17,15 @@
       overflow: hidden;
     }
 
-    /* 💕 MOVING HEARTS BACKGROUND */
+    /* 💕 FLOATING HEARTS BACKGROUND */
     .hearts {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       z-index: -1;
+      overflow: hidden;
     }
 
     .heart {
@@ -106,6 +106,40 @@
       left: 20px;
       top: 120px;
     }
+
+    /* ❤️ HEARTBEAT TEXT */
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      25%  { transform: scale(1.08); }
+      40%  { transform: scale(1); }
+      60%  { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .heartbeat {
+      animation: heartbeat 1.6s infinite;
+    }
+
+    /* ✍️ TYPING EFFECT */
+    .typing {
+      width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #ff4d6d;
+      animation: typing 3s steps(40, end) forwards,
+                 blink 0.8s infinite;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
   </style>
 </head>
 
@@ -114,6 +148,7 @@
   <!-- 💕 HEART BACKGROUND -->
   <div class="hearts"></div>
 
+  <!-- 💌 MAIN CARD -->
   <div class="card">
     <h1>Charan, will you be my Valentine? 💘</h1>
     <button class="yes" onclick="yesClick()">Yes 💖</button>
@@ -121,39 +156,34 @@
   </div>
 
   <script>
-    /* 💕 HEART CREATOR */
+    /* 💕 CREATE FLOATING HEARTS */
     const heartsContainer = document.querySelector(".hearts");
 
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
-
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-      heart.style.opacity = Math.random();
-
       heartsContainer.appendChild(heart);
-
       setTimeout(() => heart.remove(), 6000);
     }
 
     setInterval(createHeart, 300);
 
-    /* 😜 NO BUTTON */
+    /* 😜 NO BUTTON MOVES */
     const noBtn = document.getElementById("noBtn");
     const card = document.querySelector(".card");
 
     function randomMove() {
       const maxX = card.clientWidth - noBtn.offsetWidth;
       const maxY = card.clientHeight - noBtn.offsetHeight;
-
       noBtn.style.left = Math.random() * maxX + "px";
       noBtn.style.top = Math.random() * maxY + "px";
     }
 
     setInterval(randomMove, 700);
 
-    /* 💖 YES SCREEN */
+    /* 💖 YES CLICK */
     function yesClick() {
       document.body.innerHTML = `
         <div class="hearts"></div>
@@ -169,11 +199,8 @@
           text-align:center;
           padding:20px;
         ">
-          <h1>You Said YES!!!... 💕</h1>
-          <h2>This means a lot to me 💕</h2>
-          <h3>Hey Charan, you are the best thing that happened to me!! 💕</h3>
-          <h4>You don't even realize how special you are to me 💕</h4>
-          <h5>My world feels brighter and happier because of you 💕</h5>
+          <h1 class="heartbeat">You Said YES!!! 💕</h1>
+          <div id="typingArea"></div>
 
           <img
             src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
@@ -182,7 +209,7 @@
         </div>
       `;
 
-      /* restart hearts */
+      /* 💕 Restart Hearts */
       setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "heart";
@@ -191,6 +218,27 @@
         document.querySelector(".hearts").appendChild(heart);
         setTimeout(() => heart.remove(), 6000);
       }, 300);
+
+      /* ✍️ Typing Messages */
+      const messages = [
+        "This means a lot to me 💕",
+        "Hey Charan, you are the best thing that happened to me 💖",
+        "You don't even realize how special you are to me 💕",
+        "My world feels brighter and happier because of you 💓"
+      ];
+
+      const typingArea = document.getElementById("typingArea");
+      let delay = 0;
+
+      messages.forEach(text => {
+        setTimeout(() => {
+          const div = document.createElement("div");
+          div.className = "typing";
+          div.textContent = text;
+          typingArea.appendChild(div);
+        }, delay);
+        delay += 3200;
+      });
     }
   </script>
 

@@ -4,146 +4,36 @@
   <meta charset="UTF-8">
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(180deg, #9167B1 0%, #33274C 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    /* 💕 HEART BACKGROUND */
-    .hearts {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 182, 193, 0.9);
-      transform: rotate(45deg);
-      animation: floatUp linear infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: inherit;
-      border-radius: 50%;
-    }
-
-    .heart::before { top: -10px; }
-    .heart::after { left: -10px; }
-
-    @keyframes floatUp {
-      from { transform: translateY(0) rotate(45deg); opacity: 1; }
-      to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
-    }
-
-    .content {
-      text-align: center;
-      z-index: 1;
-      padding: 20px;
-    }
-
-    .valentine-text {
-      font-family: 'Pacifico', cursive;
-      font-size: 36px;
-      margin-bottom: 30px;
-    }
-
-    button {
-      padding: 12px 28px;
-      font-size: 16px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      margin: 8px;
-    }
-
-    .yes {
-      background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-      color: white;
-    }
-
-    .no {
-      background: #ddd;
-      color: #333;
-      position: absolute;
-    }
-
-    .heartbeat {
-      animation: heartbeat 1.6s infinite;
-    }
-
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      25% { transform: scale(1.08); }
-      40% { transform: scale(1); }
-      60% { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-
-    .typing {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      width: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 3px solid white;
-      animation: typing 3s steps(40, end) forwards,
-                  blink 0.8s infinite;
-      margin-top: 12px;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    .qr-link {
-      margin-top: 18px;
-      font-size: 20px;
-      color: #ffd1e8;
-      text-decoration: none;
-      font-family: 'Pacifico', cursive;
-    }
-
-    .qr-link:hover {
-      text-decoration: underline;
-    }
+    body { margin: 0; height: 100vh; background: linear-gradient(180deg, #9167B1 0%, #33274C 100%); display: flex; justify-content: center; align-items: center; overflow: hidden; color: white; font-family: Arial, sans-serif; }
+    .hearts { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+    .heart { position: absolute; bottom: -20px; width: 20px; height: 20px; background: rgba(255, 182, 193, 0.9); transform: rotate(45deg); animation: floatUp linear infinite; }
+    .heart::before, .heart::after { content: ""; position: absolute; width: 20px; height: 20px; background: inherit; border-radius: 50%; }
+    .heart::before { top: -10px; } .heart::after { left: -10px; }
+    @keyframes floatUp { from { transform: translateY(0) rotate(45deg); opacity: 1; } to { transform: translateY(-110vh) rotate(45deg); opacity: 0; } }
+    .content { text-align: center; z-index: 1; padding: 20px; }
+    .valentine-text { font-family: 'Pacifico', cursive; font-size: 36px; margin-bottom: 30px; }
+    button { padding: 12px 28px; font-size: 16px; border: none; border-radius: 25px; cursor: pointer; margin: 8px; }
+    .yes { background: linear-gradient(135deg, #ff4d6d, #ff8fa3); color: white; }
+    .no { background: #ddd; color: #333; position: absolute; }
+    .heartbeat { animation: heartbeat 1.6s infinite; }
+    @keyframes heartbeat { 0% { transform: scale(1); } 25% { transform: scale(1.08); } 40% { transform: scale(1); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+    .typing { font-family: 'Playfair Display', serif; font-size: 20px; width: 0; overflow: hidden; white-space: nowrap; border-right: 3px solid white; animation: typing 3s steps(40, end) forwards, blink 0.8s infinite; margin-top: 12px; }
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+    .qr-link { margin-top: 18px; font-size: 20px; color: #ffd1e8; text-decoration: none; font-family: 'Pacifico', cursive; }
   </style>
 </head>
-
 <body>
 
-<audio id="bgMusic">
-  <source src="Pattuma _ Love Insurance Kompa.mp3" type="audio/mpeg">
+<audio id="bgMusic" preload="auto" loop>
+  <source src="file:///C:/Users/keerthi.vardhani/Downloads/Pattuma%20_%20Love%20Insurance%20Kompa.mp3" type="audio/mpeg">
 </audio>
 
 <div class="hearts"></div>
 
-<div class="content" id="mainContent">
+<div class="content" id="ui-container">
   <h1 class="valentine-text">Charan, will you be my Valentine? 💘</h1>
   <button class="yes" onclick="yesClick()">Yes 💖</button>
   <button class="no" id="noBtn">No 😜</button>
@@ -171,41 +61,22 @@
   }, 700);
 
   function yesClick() {
-    // Start the music
+    // START THE LOCAL AUDIO
     const music = document.getElementById("bgMusic");
-    music.play().catch(error => console.log("Audio play blocked until interaction:", error));
+    music.play().catch(e => {
+      console.log("Play failed: Browsers usually block local files unless you run a local server or allow 'Local File Access'.", e);
+    });
 
-    // Update the screen content
-    document.body.innerHTML = `
-      <div class="hearts"></div>
-
-      <div style="
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        background: linear-gradient(180deg, #9167B1 0%, #33274C 100%);
-        color:white;
-        text-align:center;
-        padding:20px;
-      ">
+    // UPDATE UI
+    document.getElementById("ui-container").innerHTML = `
         <h1 class="heartbeat" style="font-family:'Pacifico', cursive; font-size:38px;">
           You Said YES!!! 💕
         </h1>
-
         <div id="typingArea"></div>
-
-        <img
-          src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg"
-          style="width:260px; margin-top:25px; border-radius:20px;"
-        >
-
+        <img src="https://thumbs.dreamstime.com/b/cute-cartoon-couple-sharing-shy-hug-red-heart-them-cute-cartoon-couple-sharing-shy-hug-red-heart-432979877.jpg" style="width:260px; margin-top:25px; border-radius:20px;">
+        <br>
         <a class="qr-link" href="#" onclick="openQR()">open this 💌</a>
-      </div>
     `;
-
-    startHearts();
 
     const messages = [
       "Hey Charan, you are the best thing that happened to me 💖",
@@ -215,7 +86,6 @@
 
     const area = document.getElementById("typingArea");
     let delay = 0;
-
     messages.forEach(text => {
       setTimeout(() => {
         const line = document.createElement("div");
@@ -229,73 +99,15 @@
 
   function openQR() {
     const qrWindow = window.open("", "_blank");
-
     qrWindow.document.write(`
       <html>
-      <head>
-        <title>💌 Love QR</title>
-        <style>
-          body {
-            margin:0;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            flex-direction:column;
-            background: linear-gradient(180deg, #9167B1 0%, #33274C 100%);
-            color:white;
-            overflow:hidden;
-            font-family: Arial, sans-serif;
-          }
-
-          .heart {
-            position:absolute;
-            bottom:-20px;
-            width:20px;
-            height:20px;
-            background: rgba(255,182,193,0.9);
-            transform: rotate(45deg);
-            animation: floatUp linear infinite;
-          }
-
-          .heart::before,
-          .heart::after {
-            content:"";
-            position:absolute;
-            width:20px;
-            height:20px;
-            background: inherit;
-            border-radius:50%;
-          }
-
-          .heart::before { top:-10px; }
-          .heart::after { left:-10px; }
-
-          @keyframes floatUp {
-            from { transform: translateY(0) rotate(45deg); opacity: 1; }
-            to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
-          }
-        </style>
-      </head>
-
-      <body>
+      <body style="margin:0; height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; background: linear-gradient(180deg, #9167B1 0%, #33274C 100%); color:white; font-family: Arial;">
         <h2>Scan this 💕</h2>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=I%20love%20you%20a%20lott%20🥰">
-        <script>
-          setInterval(() => {
-            const heart = document.createElement("div");
-            heart.className = "heart";
-            heart.style.left = Math.random()*100 + "vw";
-            heart.style.animationDuration = 3 + Math.random()*3 + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-          }, 300);
-        <\/script>
       </body>
       </html>
     `);
   }
 </script>
-
 </body>
 </html>

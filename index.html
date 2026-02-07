@@ -5,7 +5,6 @@
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 💕 GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
@@ -109,7 +108,7 @@
       white-space: nowrap;
       border-right: 3px solid white;
       animation: typing 3s steps(40, end) forwards,
-                 blink 0.8s infinite;
+                  blink 0.8s infinite;
       margin-top: 12px;
     }
 
@@ -138,9 +137,13 @@
 
 <body>
 
+<audio id="bgMusic">
+  <source src="Pattuma _ Love Insurance Kompa.mp3" type="audio/mpeg">
+</audio>
+
 <div class="hearts"></div>
 
-<div class="content">
+<div class="content" id="mainContent">
   <h1 class="valentine-text">Charan, will you be my Valentine? 💘</h1>
   <button class="yes" onclick="yesClick()">Yes 💖</button>
   <button class="no" id="noBtn">No 😜</button>
@@ -168,6 +171,11 @@
   }, 700);
 
   function yesClick() {
+    // Start the music
+    const music = document.getElementById("bgMusic");
+    music.play().catch(error => console.log("Audio play blocked until interaction:", error));
+
+    // Update the screen content
     document.body.innerHTML = `
       <div class="hearts"></div>
 
@@ -291,5 +299,3 @@
 
 </body>
 </html>
-
-
